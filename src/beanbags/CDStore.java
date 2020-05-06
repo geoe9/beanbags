@@ -1,6 +1,15 @@
 package beanbags;
 import java.io.IOException;
 
+/**
+ * CDStore.
+ * 
+ * Implementation of CutDownStore interface.
+ *
+ * @author George Rogers
+ * @version 1.0
+ */
+
 public class CDStore implements CutDownStore {
 	
 	private ObjectArrayList storeList = new ObjectArrayList();
