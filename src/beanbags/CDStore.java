@@ -37,6 +37,7 @@ public class CDStore implements CutDownStore {
 		return id.matches("^[0-9a-fA-F]{8}$"); //regex test using hexadecimal characters and length check (8)
 	}
 
+	@Override
 	public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month)
 			throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException, IllegalIDException,
 			InvalidMonthException {
@@ -62,6 +63,7 @@ public class CDStore implements CutDownStore {
 		}
 	}
 
+	@Override
 	public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month,
 			String information) throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
 			IllegalIDException, InvalidMonthException {
@@ -87,6 +89,7 @@ public class CDStore implements CutDownStore {
 		}
 	}
 
+	@Override
 	public void setBeanBagPrice(String id, int priceInPence)
 			throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
 		//input validation
@@ -103,6 +106,7 @@ public class CDStore implements CutDownStore {
 		b.setPrice(priceInPence); //use setter method to edit price
 	}
 
+	@Override
 	public void sellBeanBags(int num, String id)
 			throws BeanBagNotInStockException, InsufficientStockException, IllegalNumberOfBeanBagsSoldException,
 			PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
@@ -136,6 +140,7 @@ public class CDStore implements CutDownStore {
 		}
 	}
 
+	@Override
 	public int beanBagsInStock() {
 		int total = 0;
 		for (int i=0; i<storeList.size(); i++) { //loop over each BeanBag object and total num attribute
@@ -145,6 +150,7 @@ public class CDStore implements CutDownStore {
 		return total;
 	}
 
+	@Override
 	public int beanBagsInStock(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
 		//input validation
 		if (!idIsValid(id)) {
@@ -157,6 +163,7 @@ public class CDStore implements CutDownStore {
 		return b.getNum();
 	}
 
+	@Override
 	public int getNumberOfDifferentBeanBagsInStock() {
 		int total = 0;
 		for (int i=0; i<storeList.size(); i++) { //iterate over each beanbag object and check if they have stock
@@ -168,6 +175,7 @@ public class CDStore implements CutDownStore {
 		return total;
 	}
 
+	@Override
 	public int getNumberOfSoldBeanBags() {
 		int total = 0;
 		for (int i=0; i<soldList.size(); i++) {
@@ -177,6 +185,7 @@ public class CDStore implements CutDownStore {
 		return total;
 	}
 
+	@Override
 	public int getNumberOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
 		//input validation
 		if (!idIsValid(id)) {
@@ -189,6 +198,7 @@ public class CDStore implements CutDownStore {
 		return b.getNum();
 	}
 
+	@Override
 	public int getTotalPriceOfSoldBeanBags() {
 		int total = 0;
 		for (int i=0; i<soldList.size(); i++) {
@@ -198,6 +208,7 @@ public class CDStore implements CutDownStore {
 		return total;
 	}
 
+	@Override
 	public int getTotalPriceOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
 		if (!idIsValid(id)) {
 			throw new IllegalIDException();
@@ -209,6 +220,7 @@ public class CDStore implements CutDownStore {
 		return b.getNum() * b.getPrice(); //multiply number sold by price to find total value sold for
 	}
 
+	@Override
 	public String getBeanBagDetails(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
 		String i = getBeanBagByID(id, storeList).getInfo();
 		if (i.isEmpty() || i == null || i.isBlank()) { //return empty string if info is blank or is empty
@@ -218,17 +230,20 @@ public class CDStore implements CutDownStore {
 		}
 	}
 
+	@Override
 	public void empty() {
 		//init new ObjectArrayLists to wipe old ones
 		storeList = new ObjectArrayList();
 		soldList = new ObjectArrayList();
 	}
 
+	@Override
 	public void resetSaleAndCostTracking() {
 		//init new ObjectArrayList to wipe old one
 		soldList = new ObjectArrayList();
 	}
 
+	@Override
 	public void replace(String oldId, String replacementId) throws BeanBagIDNotRecognisedException, IllegalIDException {
 		//input validation
 		if (!idIsValid(replacementId)) {
